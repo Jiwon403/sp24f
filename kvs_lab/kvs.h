@@ -1,18 +1,18 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-
+#define max_level 15
 struct node {
 	char key[100];
 	char* value;
-	struct node* next;
+	struct node* next[];
 };	
 typedef struct node node_t;
 
-
 struct kvs{
-	struct node* db; // database
+	struct node* db[max_level]; // database
 	int items; // number of data 
+	int level;
 };
 typedef struct kvs kvs_t; 
 

@@ -1,23 +1,40 @@
 #include "kvs.h"
-
-int main()
-{
+int main() {
 	kvs_t* kvs = open();
 
 	if(!kvs) {
 		printf("Failed to open kvs\n");
 		return -1;
 	}
-
-	// workload execution  
+	FILE *query1, *answer;
+	query1 = fopen("query.dat", "r");
+	answer = fopen("answer.dat", "w");
 	
-	// 1) 	file read 
-	// 2) 	if put, insert (key, value) into kvs.
-	// 		if get, seach the key in kvs and return the value. 
-	//		Return -1 if the key is not found  
+	if(answer == NULL || query1 == NULL) return -1;
+	char str[256];
+	char *cmd, *key, *value;
+	while(fgets(str, sizeof(str), query1) != NULL) {
+		printf("fgets SUCCEED\n");
+		cmd = strtok(str, ",");
+		key = strtok(NULL, ",");
+		value = strtok(NULL, ",");
+		if(value[strlen(value) - 1] == '\n') value[strlen(value) - 1] = '\0';
+		if(!strcmp(cmd, "set")) {
+			put(kvs, key, value);
+			printf("PUT END\n");
+		}
+		else if(!strcmp(cmd, "get")) {
+			printf("GETTTTT\n");
+			// char* result = get(kvs, key);
+			// printf("%s\n", result);
+			// fprintf(answer, "%s\n", strdup(result));
+			fprintf(answer, "%s\n", get(kvs, key));
+			printf("GETEND");
+		}
+	}
 
-
+	fclose(query1);
+	fclose(answer);
 	close(kvs);
-	
 	return 0;
 }
