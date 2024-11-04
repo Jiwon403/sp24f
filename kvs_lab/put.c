@@ -17,7 +17,7 @@ int put(kvs_t* kvs, const char* key, const char* value) {
     int new_level = rand_level();
     if (new_level > kvs->level) {
         for (int i = kvs->level; i < new_level; i++) {
-            update[i] = kvs->db;  // 새로 추가된 레벨을 헤더로 설정
+            update[i] = kvs->db;
         }
         kvs->level = new_level;
     }

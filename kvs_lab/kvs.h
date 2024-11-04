@@ -9,13 +9,13 @@ struct node {
 };
 typedef struct node node_t;
 struct kvs{
-	node_t* db; // database
-	int items; // number of data 
+	node_t* db;
+	int items;
 	int level;
 };
 typedef struct kvs kvs_t; 
 
 kvs_t* open();
-int close(kvs_t* kvs); // free all memory space 
-int put(kvs_t* kvs, const char* key, const char* value); // return -1 if failed.
-char* get(kvs_t* kvs, const char* key); // return NULL if not found. 
+int close(kvs_t* kvs); 
+int put(kvs_t* kvs, const char* key, const char* value);
+char* get(kvs_t* kvs, const char* key); 

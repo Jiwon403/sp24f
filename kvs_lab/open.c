@@ -1,6 +1,5 @@
 #include "kvs.h"
 
-
 kvs_t* open() {
 	kvs_t* kvs = (kvs_t*)malloc(sizeof(*kvs));
 	if(kvs == NULL) return NULL;
