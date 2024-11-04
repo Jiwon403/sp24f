@@ -6,16 +6,14 @@ struct node {
 	char key[100];
 	char* value;
 	struct node* next[];
-};	
+};
 typedef struct node node_t;
-
 struct kvs{
-	struct node* db[max_level]; // database
+	node_t* db; // database
 	int items; // number of data 
 	int level;
 };
 typedef struct kvs kvs_t; 
-
 
 kvs_t* open();
 int close(kvs_t* kvs); // free all memory space 

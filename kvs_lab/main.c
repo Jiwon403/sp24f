@@ -14,25 +14,13 @@ int main() {
 	char str[256];
 	char *cmd, *key, *value;
 	while(fgets(str, sizeof(str), query1) != NULL) {
-		printf("fgets SUCCEED\n");
 		cmd = strtok(str, ",");
 		key = strtok(NULL, ",");
 		value = strtok(NULL, ",");
 		if(value[strlen(value) - 1] == '\n') value[strlen(value) - 1] = '\0';
-		if(!strcmp(cmd, "set")) {
-			put(kvs, key, value);
-			printf("PUT END\n");
-		}
-		else if(!strcmp(cmd, "get")) {
-			printf("GETTTTT\n");
-			// char* result = get(kvs, key);
-			// printf("%s\n", result);
-			// fprintf(answer, "%s\n", strdup(result));
-			fprintf(answer, "%s\n", get(kvs, key));
-			printf("GETEND");
-		}
+		if(!strcmp(cmd, "set")) put(kvs, key, value);
+		else if(!strcmp(cmd, "get")) fprintf(answer, "%s\n", get(kvs, key));
 	}
-
 	fclose(query1);
 	fclose(answer);
 	close(kvs);
